@@ -1,6 +1,6 @@
 import sqlite3
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, simpledialog
 from tkinter import messagebox
 from PIL import Image, ImageTk
 
@@ -91,6 +91,9 @@ class EmployeeWindow(tk.Toplevel):
         self.add_employee_button = tk.Button(self, text="Добавить сотрудника", command=self.add_employee)
         self.add_employee_button.pack()
 
+        # Создаем атрибут для хранения окна добавления
+        self.add_employee_dialog = None
+        
         # Обновляем таблицу "Сотрудник" при открытии окна
         self.update_employee_table()
 
@@ -101,10 +104,72 @@ class EmployeeWindow(tk.Toplevel):
         for row in data:
             self.tree.insert("", "end", values=row)
 
+    # Функция для добавления нового сотрудника в базу данных
     def add_employee(self):
-        # Ваш код для добавления сотрудника в базу данных
-        pass
+        # Создаем окно для ввода данных сотрудника
+        self.add_employee_dialog = tk.Toplevel(self)
+        self.add_employee_dialog.title("Добавить сотрудника")
 
+        # Создаем и размещаем подписи к полям
+        tk.Label(self.add_employee_dialog, text="ФИО:").grid(row=0, column=0, padx=10, pady=5)
+        tk.Label(self.add_employee_dialog, text="Пол:").grid(row=1, column=0, padx=10, pady=5)
+        tk.Label(self.add_employee_dialog, text="Дата рождения:").grid(row=2, column=0, padx=10, pady=5)
+        tk.Label(self.add_employee_dialog, text="Образование:").grid(row=3, column=0, padx=10, pady=5)
+        tk.Label(self.add_employee_dialog, text="Должность:").grid(row=4, column=0, padx=10, pady=5)
+        tk.Label(self.add_employee_dialog, text="Профессия:").grid(row=5, column=0, padx=10, pady=5)
+        tk.Label(self.add_employee_dialog, text="Дата приема на работу:").grid(row=6, column=0, padx=10, pady=5)
+        tk.Label(self.add_employee_dialog, text="Зарплата:").grid(row=7, column=0, padx=10, pady=5)
+        tk.Label(self.add_employee_dialog, text="Паспортные данные:").grid(row=8, column=0, padx=10, pady=5)
+        tk.Label(self.add_employee_dialog, text="Адрес:").grid(row=9, column=0, padx=10, pady=5)
+
+        # Создаем и размещаем поля ввода
+        self.name_entry = tk.Entry(self.add_employee_dialog)
+        self.name_entry.grid(row=0, column=1, padx=10, pady=5)
+        self.gender_entry = tk.Entry(self.add_employee_dialog)
+        self.gender_entry.grid(row=1, column=1, padx=10, pady=5)
+        self.birth_date_entry = tk.Entry(self.add_employee_dialog)
+        self.birth_date_entry.grid(row=2, column=1, padx=10, pady=5)
+        self.education_entry = tk.Entry(self.add_employee_dialog)
+        self.education_entry.grid(row=3, column=1, padx=10, pady=5)
+        self.position_entry = tk.Entry(self.add_employee_dialog)
+        self.position_entry.grid(row=4, column=1, padx=10, pady=5)
+        self.profession_entry = tk.Entry(self.add_employee_dialog)
+        self.profession_entry.grid(row=5, column=1, padx=10, pady=5)
+        self.hire_date_entry = tk.Entry(self.add_employee_dialog)
+        self.hire_date_entry.grid(row=6, column=1, padx=10, pady=5)
+        self.salary_entry = tk.Entry(self.add_employee_dialog)
+        self.salary_entry.grid(row=7, column=1, padx=10, pady=5)
+        self.passport_data_entry = tk.Entry(self.add_employee_dialog)
+        self.passport_data_entry.grid(row=8, column=1, padx=10, pady=5)
+        self.address_entry = tk.Entry(self.add_employee_dialog)
+        self.address_entry.grid(row=9, column=1, padx=10, pady=5)
+
+        # Создаем кнопку для добавления сотрудника
+        add_button = tk.Button(self.add_employee_dialog, text="Добавить", command=self.insert_employee)
+        add_button.grid(row=10, columnspan=2, padx=10, pady=10)
+
+
+    def insert_employee(self):
+        # Получите данные из полей ввода
+        name = self.name_entry.get()
+        gender = self.gender_entry.get()
+        birth_date = self.birth_date_entry.get()
+        education = self.education_entry.get()
+        position = self.position_entry.get()
+        profession = self.profession_entry.get()
+        hire_date = self.hire_date_entry.get()
+        salary = self.salary_entry.get()
+        passport_data = self.passport_data_entry.get()
+        address = self.address_entry.get()
+
+        # Вставьте данные в базу данных
+        cursor.execute("INSERT INTO employee (full_name, gender, birth_date, education, position, profession, hire_date, salary, passport_data, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                       (name, gender, birth_date, education, position, profession, hire_date, salary, passport_data, address))
+        conn.commit()  # Сохраните изменения в базе данных
+        self.update_employee_table()  # Обновите таблицу сотрудников
+        if self.add_employee_dialog:
+            self.add_employee_dialog.destroy()
+            
 # Окно для работы с таблицей "Отдел"
 class DepartmentWindow(tk.Toplevel):
     def __init__(self, master):
@@ -149,9 +214,45 @@ class DepartmentWindow(tk.Toplevel):
 
 
     def add_department(self):
-        # Ваш код для добавления отдела в базу данных
-        pass
+        # Создаем окно для ввода данных отдела
+        self.add_department_dialog = tk.Toplevel(self)
+        self.add_department_dialog.title("Добавить отдел")
 
+        # Создаем и размещаем подписи к полям
+        tk.Label(self.add_department_dialog, text="Название:").grid(row=0, column=0, padx=10, pady=5)
+        tk.Label(self.add_department_dialog, text="Руководитель:").grid(row=1, column=0, padx=10, pady=5)
+        tk.Label(self.add_department_dialog, text="Контактная информация:").grid(row=2, column=0, padx=10, pady=5)
+        tk.Label(self.add_department_dialog, text="ID сотрудника:").grid(row=3, column=0, padx=10, pady=5)
+
+        # Создаем и размещаем поля ввода
+        self.name_entry = tk.Entry(self.add_department_dialog)
+        self.name_entry.grid(row=0, column=1, padx=10, pady=5)
+        self.head_entry = tk.Entry(self.add_department_dialog)
+        self.head_entry.grid(row=1, column=1, padx=10, pady=5)
+        self.contact_info_entry = tk.Entry(self.add_department_dialog)
+        self.contact_info_entry.grid(row=2, column=1, padx=10, pady=5)
+        self.employee_id_entry = tk.Entry(self.add_department_dialog)
+        self.employee_id_entry.grid(row=3, column=1, padx=10, pady=5)
+
+        # Создаем кнопку для добавления отдела
+        add_button = tk.Button(self.add_department_dialog, text="Добавить", command=self.insert_department)
+        add_button.grid(row=4, columnspan=2, padx=10, pady=10)
+
+    # Функция для вставки данных отдела в базу данных
+    def insert_department(self):
+        # Получите данные из полей ввода
+        name = self.name_entry.get()
+        head = self.head_entry.get()
+        contact_info = self.contact_info_entry.get()
+        employee_id = self.employee_id_entry.get()
+
+        # Вставьте данные в таблицу "Отдел" в базе данных
+        cursor.execute("INSERT INTO department (name, head, contact_info, employee_id) VALUES (?, ?, ?, ?)",
+                    (name, head, contact_info, employee_id))
+        conn.commit()  # Сохраните изменения в базе данных
+        self.update_department_table()  # Обновите таблицу отделов
+        if self.add_department_dialog:
+            self.add_department_dialog.destroy()
 
 # Окно для работы с таблицей "Вакансия"
 class VacancyWindow(tk.Toplevel):
@@ -194,10 +295,42 @@ class VacancyWindow(tk.Toplevel):
             self.tree.insert("", "end", values=row)
 
     def add_vacancy(self):
-        # Ваш код для добавления вакансии в базу данных
-        pass
+        # Создаем окно для ввода данных вакансии
+        self.add_vacancy_dialog = tk.Toplevel(self)
+        self.add_vacancy_dialog.title("Добавить вакансию")
 
+        # Создаем и размещаем подписи к полям
+        tk.Label(self.add_vacancy_dialog, text="Название:").grid(row=0, column=0, padx=10, pady=5)
+        tk.Label(self.add_vacancy_dialog, text="Требования:").grid(row=1, column=0, padx=10, pady=5)
+        tk.Label(self.add_vacancy_dialog, text="Условия работы:").grid(row=2, column=0, padx=10, pady=5)
 
+        # Создаем и размещаем поля ввода
+        self.name_entry = tk.Entry(self.add_vacancy_dialog)
+        self.name_entry.grid(row=0, column=1, padx=10, pady=5)
+        self.requirements_entry = tk.Entry(self.add_vacancy_dialog)
+        self.requirements_entry.grid(row=1, column=1, padx=10, pady=5)
+        self.working_conditions_entry = tk.Entry(self.add_vacancy_dialog)
+        self.working_conditions_entry.grid(row=2, column=1, padx=10, pady=5)
+
+        # Создаем кнопку для добавления вакансии
+        add_button = tk.Button(self.add_vacancy_dialog, text="Добавить", command=self.insert_vacancy)
+        add_button.grid(row=3, columnspan=2, padx=10, pady=10)
+
+    # Функция для вставки данных вакансии в базу данных
+    def insert_vacancy(self):
+        # Получите данные из полей ввода
+        name = self.name_entry.get()
+        requirements = self.requirements_entry.get()
+        working_conditions = self.working_conditions_entry.get()
+
+        # Вставьте данные в таблицу "Вакансия" в базе данных
+        cursor.execute("INSERT INTO vacancy (name, requirements, working_conditions) VALUES (?, ?, ?)",
+                    (name, requirements, working_conditions))
+        conn.commit()  # Сохраните изменения в базе данных
+        self.update_vacancy_table()  # Обновите таблицу вакансий
+        if self.add_vacancy_dialog:
+            self.add_vacancy_dialog.destroy()
+            
 # Окно для работы с таблицей "Заявка на вакансию"
 class ApplicationWindow(tk.Toplevel):
     def __init__(self, master):
@@ -237,9 +370,37 @@ class ApplicationWindow(tk.Toplevel):
             self.tree.insert("", "end", values=row)
 
     def add_application(self):
-        # Ваш код для добавления заявки на вакансию в базу данных
-        pass
+        # Создаем окно для ввода данных заявки на вакансию
+        self.add_application_dialog = tk.Toplevel(self)
+        self.add_application_dialog.title("Добавить заявку на вакансию")
 
+        # Создаем и размещаем подписи к полям
+        tk.Label(self.add_application_dialog, text="Дата подачи:").grid(row=0, column=0, padx=10, pady=5)
+        tk.Label(self.add_application_dialog, text="Статус:").grid(row=1, column=0, padx=10, pady=5)
+
+        # Создаем и размещаем поля ввода
+        self.application_date_entry = tk.Entry(self.add_application_dialog)
+        self.application_date_entry.grid(row=0, column=1, padx=10, pady=5)
+        self.status_entry = tk.Entry(self.add_application_dialog)
+        self.status_entry.grid(row=1, column=1, padx=10, pady=5)
+
+        # Создаем кнопку для добавления заявки на вакансию
+        add_button = tk.Button(self.add_application_dialog, text="Добавить", command=self.insert_application)
+        add_button.grid(row=2, columnspan=2, padx=10, pady=10)
+    
+    # Функция для вставки данных заявки на вакансию в базу данных
+    def insert_application(self):
+        # Получите данные из полей ввода
+        application_date = self.application_date_entry.get()
+        status = self.status_entry.get()
+
+        # Вставьте данные в таблицу "Заявка на вакансию" в базе данных
+        cursor.execute("INSERT INTO application (application_date, status) VALUES (?, ?)",
+                    (application_date, status))
+        conn.commit()  # Сохраните изменения в базе данных
+        self.update_application_table()  # Обновите таблицу заявок на вакансии
+        if self.add_application_dialog:
+            self.add_application_dialog.destroy()
 
 # Главное окно приложения
 app = MainApp()

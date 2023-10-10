@@ -1,9 +1,10 @@
 import sqlite3
 import tkinter as tk
-from tkinter import ttk, simpledialog
-from tkinter import messagebox
+from tkinter import ttk
 from tkinter.messagebox import showinfo
 from PIL import Image, ImageTk
+import pandas as pd
+import xlsxwriter
 
 # Создаем подключение к базе данных
 conn = sqlite3.connect('employee_db.db')
@@ -112,9 +113,12 @@ class EmployeeWindow(tk.Toplevel):
         self.search_employee_button = tk.Button(self, text="Найти сотрудника", command=self.search_employee)
         self.search_employee_button.pack()
 
-
         # Создаем атрибут для хранения окна добавления
         self.add_employee_dialog = None
+
+        # Кнопка для экспорта данных в Excel
+        export_button = tk.Button(self, text="Экспорт в Excel", command=self.export_to_excel)
+        export_button.pack()
         
         # Обновляем таблицу "Сотрудник" при открытии окна
         self.update_employee_table()
@@ -229,6 +233,29 @@ class EmployeeWindow(tk.Toplevel):
             
         # Вызовите функцию для отображения результатов поиска
         self.display_search_results(data)
+    
+    def export_to_excel(self):
+        # Получите данные из базы данных
+        cursor.execute("SELECT * FROM employee")
+        data = cursor.fetchall()
+
+        # Создайте DataFrame из данных
+        df = pd.DataFrame(data, columns=["ID", "First Name", "Last Name", "Age", "Gender", "Address", "Phone",
+                                         "Salary", "Department ID", "Email", "Hire Date"])
+
+        # Укажите путь к файлу Excel
+        excel_file_path = "employees.xlsx"
+
+        # Создайте объект writer для записи данных в Excel
+        writer = pd.ExcelWriter(excel_file_path, engine='xlsxwriter')
+
+        # Запишите DataFrame в файл Excel
+        df.to_excel(writer, 'Лист 1', index=False)
+
+        # Сохраните результат
+        writer.close()
+
+        showinfo(title="Успешно", message=f"Данные экспортированы в {excel_file_path}")
 
 class EditEmployeeWindow(tk.Toplevel):
     def __init__(self, parent, employee_id, employee_window):
@@ -368,6 +395,10 @@ class DepartmentWindow(tk.Toplevel):
         # Создаем атрибут для хранения окна добавления
         self.add_department_dialog = None
 
+        # Кнопка для экспорта данных в Excel
+        export_button = tk.Button(self, text="Экспорт в Excel", command=self.export_to_excel)
+        export_button.pack()
+
         # Обновляем таблицу "Отделы" при открытии окна
         self.update_department_table()
 
@@ -495,6 +526,28 @@ class DepartmentWindow(tk.Toplevel):
 
         # Вызовите функцию для отображения результатов поиска
         self.display_search_results(data)
+    
+    def export_to_excel(self):
+        # Получите данные из базы данных
+        cursor.execute("SELECT * FROM department")
+        data = cursor.fetchall()
+
+        # Создайте DataFrame из данных
+        df = pd.DataFrame(data, columns=["ID", "Name", "Head", "Contact Info", "Employee ID"])
+
+        # Укажите путь к файлу Excel
+        excel_file_path = "departments.xlsx"
+
+        # Создайте объект writer для записи данных в Excel
+        writer = pd.ExcelWriter(excel_file_path, engine='xlsxwriter')
+
+        # Запишите DataFrame в файл Excel
+        df.to_excel(writer, 'Лист 1', index=False)
+
+        # Сохраните результат
+        writer.close()
+
+        showinfo(title="Успешно", message=f"Данные экспортированы в {excel_file_path}")
 
 class EditDepartmentWindow(tk.Toplevel):
     def __init__(self, parent, department_id, department_window):
@@ -602,6 +655,10 @@ class VacancyWindow(tk.Toplevel):
         search_vacancy_button = tk.Button(self, text="Найти вакансию", command=self.search_vacancy)
         search_vacancy_button.pack()
 
+        # Кнопка для экспорта данных в Excel
+        export_button = tk.Button(self, text="Экспорт в Excel", command=self.export_to_excel)
+        export_button.pack()
+
         # Обновляем таблицу "Вакансия" при открытии окна
         self.update_vacancy_table()
 
@@ -686,6 +743,28 @@ class VacancyWindow(tk.Toplevel):
 
         # Вызовите функцию для отображения результатов поиска
         self.display_search_results(data)
+
+    def export_to_excel(self):
+        # Получите данные из базы данных
+        cursor.execute("SELECT * FROM vacancy")
+        data = cursor.fetchall()
+
+        # Создайте DataFrame из данных
+        df = pd.DataFrame(data, columns=["ID", "Name", "Requirements", "Working Conditions"])
+
+        # Укажите путь к файлу Excel
+        excel_file_path = "vacancies.xlsx"
+
+        # Создайте объект writer для записи данных в Excel
+        writer = pd.ExcelWriter(excel_file_path, engine='xlsxwriter')
+
+        # Запишите DataFrame в файл Excel
+        df.to_excel(writer, 'Лист 1', index=False)
+
+        # Сохраните результат
+        writer.close()
+
+        showinfo(title="Успешно", message=f"Данные экспортированы в {excel_file_path}")
             
 class EditVacancyWindow(tk.Toplevel):
     def __init__(self, parent, vacancy_id, vacancy_window):
@@ -783,6 +862,10 @@ class ApplicationWindow(tk.Toplevel):
         search_application_button = tk.Button(self, text="Найти заявку", command=self.search_application)
         search_application_button.pack()
 
+        # Кнопка для экспорта данных в Excel
+        export_button = tk.Button(self, text="Экспорт в Excel", command=self.export_to_excel)
+        export_button.pack()
+
         # Обновляем таблицу "Заявки на вакансии" при открытии окна
         self.update_application_table()
 
@@ -853,6 +936,28 @@ class ApplicationWindow(tk.Toplevel):
                        (search_query, search_query))
         data = cursor.fetchall()
         self.display_search_results(data)
+
+    def export_to_excel(self):
+        # Получите данные из базы данных
+        cursor.execute("SELECT * FROM application")
+        data = cursor.fetchall()
+
+        # Создайте DataFrame из данных
+        df = pd.DataFrame(data, columns=["ID", "Application Date", "Status", ""])
+
+        # Укажите путь к файлу Excel
+        excel_file_path = "applications.xlsx"
+
+        # Создайте объект writer для записи данных в Excel
+        writer = pd.ExcelWriter(excel_file_path, engine='xlsxwriter')
+
+        # Запишите DataFrame в файл Excel
+        df.to_excel(writer, 'Лист 1', index=False)
+
+        # Сохраните результат
+        writer.close()
+
+        showinfo(title="Успешно", message=f"Данные экспортированы в {excel_file_path}")
 
 class EditApplicationWindow(tk.Toplevel):
     def __init__(self, parent, application_id, application_window):

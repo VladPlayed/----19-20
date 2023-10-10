@@ -47,7 +47,6 @@ class MainApp(tk.Tk):
     def open_application_window(self):
         ApplicationWindow(self)
 
-
 # Окно для работы с таблицей "Сотрудник"
 class EmployeeWindow(tk.Toplevel):
     def __init__(self, master):
@@ -240,8 +239,8 @@ class EmployeeWindow(tk.Toplevel):
         data = cursor.fetchall()
 
         # Создайте DataFrame из данных
-        df = pd.DataFrame(data, columns=["ID", "First Name", "Last Name", "Age", "Gender", "Address", "Phone",
-                                         "Salary", "Department ID", "Email", "Hire Date"])
+        df = pd.DataFrame(data, columns=["Departament ID", "Full Name", "Gender", "Birth Date", "Education",
+            "Position", "Profession", "Hire Date", "Salary", "Passport Data", "Address"])
 
         # Укажите путь к файлу Excel
         excel_file_path = "employees.xlsx"

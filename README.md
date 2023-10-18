@@ -1,13 +1,13 @@
 # Project for TRPO 2023
 Эта система представляет собой программное решение для управления кадровыми данными в организации. Система включает в себя базу данных для хранения информации о сотрудниках, отделах, вакансиях и заявках на вакансии. Вся функциональность системы реализована с использованием библиотеки Tkinter для создания графического интерфейса пользователя.
 ## Оглавление (быстрая навигация)
-- [Особенности](https://github.com/VladPlayed/app/new/main?readme=1#%D0%BE%D1%81%D0%BE%D0%B1%D0%B5%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D0%B8)
-- [справочники](https://github.com/VladPlayed/app/new/main?readme=1#%D0%BE%D1%81%D0%BE%D0%B1%D0%B5%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D0%B8)
-- [Технологии](https://github.com/VladPlayed/app/new/main?readme=1#%D1%82%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8)
-- [Как запустить [1 способ]](https://github.com/VladPlayed/app/new/main?readme=1#%D0%BA%D0%B0%D0%BA-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D1%82%D0%B8%D1%82%D1%8C-1-%D1%81%D0%BF%D0%BE%D1%81%D0%BE%D0%B1)
-- [Как запустить [2 способ]](https://github.com/VladPlayed/app/new/main?readme=1#%D0%BA%D0%B0%D0%BA-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D1%82%D0%B8%D1%82%D1%8C-2-%D1%81%D0%BF%D0%BE%D1%81%D0%BE%D0%B1)
-- [Автор](https://github.com/VladPlayed/app/new/main?readme=1#%D0%B0%D0%B2%D1%82%D0%BE%D1%80)
-- [Лицензия](https://github.com/VladPlayed/app/new/main?readme=1#%D0%BB%D0%B8%D1%86%D0%B5%D0%BD%D0%B7%D0%B8%D1%8F)
+- [Особенности](https://github.com/VladPlayed/app#%D0%BE%D1%81%D0%BE%D0%B1%D0%B5%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D0%B8)
+- [справочники](https://github.com/VladPlayed/app/#%D0%BE%D1%81%D0%BE%D0%B1%D0%B5%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D0%B8)
+- [Технологии](https://github.com/VladPlayed/app/#%D1%82%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8)
+- [Как запустить [1 способ]](https://github.com/VladPlayed/app/#%D0%BA%D0%B0%D0%BA-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D1%82%D0%B8%D1%82%D1%8C-1-%D1%81%D0%BF%D0%BE%D1%81%D0%BE%D0%B1)
+- [Как запустить [2 способ]](https://github.com/VladPlayed/app/#%D0%BA%D0%B0%D0%BA-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D1%82%D0%B8%D1%82%D1%8C-2-%D1%81%D0%BF%D0%BE%D1%81%D0%BE%D0%B1)
+- [Автор](https://github.com/VladPlayed/app/#%D0%B0%D0%B2%D1%82%D0%BE%D1%80)
+- [Лицензия](https://github.com/VladPlayed/app/#%D0%BB%D0%B8%D1%86%D0%B5%D0%BD%D0%B7%D0%B8%D1%8F)
 
 ### **Особенности**
 **Управление сотрудниками:** *Система позволяет добавлять, редактировать и удалять записи о сотрудниках, включая информацию о персональных данных, образовании, опыте работы и других сведениях.*

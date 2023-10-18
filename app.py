@@ -4,7 +4,6 @@ from tkinter import ttk
 from tkinter.messagebox import showinfo
 from PIL import Image, ImageTk
 import pandas as pd
-import xlsxwriter
 
 # Создаем подключение к базе данных
 conn = sqlite3.connect('employee_db.db')

@@ -49,7 +49,7 @@
 ### **Как запустить *[2 способ]***
 Скачать готовый [архив](https://github.com/VladPlayed/app/releases) с приложением.
 ### **Автор**
-*VladPlayed*
+*@VladPlayed*
 
 ### **Лицензия**
 *Этот проект лицензирован ©VladPlayed.*

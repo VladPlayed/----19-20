@@ -173,10 +173,6 @@ class EmployeeWindow(tk.Toplevel):
         tk.Label(self.add_employee_dialog, text="Паспортные данные:").grid(row=8, column=0, padx=10, pady=5)
         tk.Label(self.add_employee_dialog, text="Адрес:").grid(row=9, column=0, padx=10, pady=5)
         tk.Label(self.add_employee_dialog, text="Отдел:").grid(row=10, column=0, padx=10, pady=5)
-<<<<<<< HEAD
-=======
-        tk.Label(self.add_employee_dialog, text="Департамент:").grid(row=11, column=0, padx=10, pady=5)
->>>>>>> 116f9d823759bfa45d1fbf55533cd7d44af1c458
 
         # Создаем и размещаем поля ввода
         self.full_name_entry = tk.Entry(self.add_employee_dialog)
@@ -216,11 +212,7 @@ class EmployeeWindow(tk.Toplevel):
         position = self.position_entry.get()
         profession = self.profession_entry.get()
         hire_date = self.hire_date_entry.get()
-<<<<<<< HEAD
         salary = self.salary_entry.get()
-=======
-        salary = float(self.salary_entry.get())
->>>>>>> 116f9d823759bfa45d1fbf55533cd7d44af1c458
         passport = self.passport_entry.get()
         address = self.address_entry.get()
         department_id = self.department_entry.get()
@@ -320,10 +312,6 @@ class EditEmployeeWindow(tk.Toplevel):
         tk.Label(self, text="Паспортные данные:").grid(row=8, column=0, padx=10, pady=5)
         tk.Label(self, text="Адрес:").grid(row=9, column=0, padx=10, pady=5)
         tk.Label(self, text="Отдел:").grid(row=10, column=0, padx=10, pady=5)
-<<<<<<< HEAD
-=======
-        tk.Label(self, text="Департамент:").grid(row=11, column=0, padx=10, pady=5)
->>>>>>> 116f9d823759bfa45d1fbf55533cd7d44af1c458
 
         # Создаем и размещаем поля ввода, заполняя их текущими данными сотрудника
         self.full_name_entry = tk.Entry(self)
@@ -422,11 +410,7 @@ class EditEmployeeWindow(tk.Toplevel):
         tk.Label(self, text="Зарплата:").grid(row=7, column=0, padx=10, pady=5)
         tk.Label(self, text="Паспортные данные:").grid(row=8, column=0, padx=10, pady=5)
         tk.Label(self, text="Адрес:").grid(row=9, column=0, padx=10, pady=5)
-<<<<<<< HEAD
         tk.Label(self, text="Отдел:").grid(row=10, column=0, padx=10, pady=5)
-=======
-        tk.Label(self, text="Департамент:").grid(row=10, column=0, padx=10, pady=5)
->>>>>>> 116f9d823759bfa45d1fbf55533cd7d44af1c458
 
         # Создаем и размещаем поля ввода, заполняя их текущими данными сотрудника
         self.full_name_entry = tk.Entry(self)
@@ -1134,7 +1118,7 @@ class EditApplicationWindow(tk.Toplevel):
         self.destroy()
         self.application_window.update_application_table()
 
-# Справочники
+# Справочник Пол
 class GenderWindow(tk.Toplevel):
     def __init__(self, master):
         super().__init__(master)
@@ -1164,6 +1148,7 @@ class GenderWindow(tk.Toplevel):
         for row in data:
             self.tree.insert("", "end", values=row)
 
+# Справочник Образование
 class EducationWindow(tk.Toplevel):
     def __init__(self, master):
         super().__init__(master)
@@ -1193,6 +1178,7 @@ class EducationWindow(tk.Toplevel):
         for row in data:
             self.tree.insert("", "end", values=row)
 
+# Справочник Должности
 class PositionWindow(tk.Toplevel):
     def __init__(self, master):
         super().__init__(master)
@@ -1222,6 +1208,7 @@ class PositionWindow(tk.Toplevel):
         for row in data:
             self.tree.insert("", "end", values=row)
 
+# Справочник Профессии
 class ProfessionWindow(tk.Toplevel):
     def __init__(self, master):
         super().__init__(master)

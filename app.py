@@ -2,6 +2,7 @@ import sqlite3
 import tkinter as tk
 from tkinter import ttk
 from tkinter.messagebox import showinfo
+from tkinter import messagebox
 from PIL import Image, ImageTk
 import pandas as pd
 
@@ -14,6 +15,7 @@ class MainApp(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Управление базой данных")
+        self.resizable(False, False)
 
         # Загружаем изображение и создаем виджет Label для него
         image = Image.open("icon.png")  # Укажите путь к вашему изображению
@@ -48,6 +50,14 @@ class MainApp(tk.Tk):
         position_button.grid(row=5, column=0)
         profession_button.grid(row=5, column=1)
 
+        # Создаем кнопку "О приложении"
+        about_button = tk.Button(self, text="О приложении", command=self.about_application)
+        about_button.grid(row=6, column=0, pady=10)
+
+        # Создаем кнопку "Руководство пользователя"
+        user_guide_button = tk.Button(self, text="Руководство пользователя", command=self.user_guide)
+        user_guide_button.grid(row=6, column=1, pady=10)
+
     def open_employee_window(self):
         EmployeeWindow(self)
 
@@ -71,6 +81,22 @@ class MainApp(tk.Tk):
 
     def open_profession_window(self):
         ProfessionWindow(self)
+
+    def about_application(self):
+        # Открываем окно "О приложении"
+        AboutApplicationWindow(self)
+
+    def user_guide(self):
+        # Отображаем руководство пользователя
+        user_guide_text = (
+            "Добро пожаловать в приложение для управления базой данных!\n\n"
+            "1. Нажмите на соответствующую кнопку для открытия окна с нужными данными (сотрудники, отделы, вакансии, заявки).\n"
+            "2. В каждом окне вы можете добавлять, редактировать и удалять записи с помощью соответствующих кнопок.\n"
+            "3. Используйте кнопку поиска для фильтрации данных по вашему запросу.\n"
+            "4. Не забудьте сохранить изменения после редактирования данных.\n"
+            "5. Для выхода из приложения нажмите на крестик в верхнем правом углу окна."
+        )
+        messagebox.showinfo("Руководство пользователя", user_guide_text)
 
 # Окно для работы с таблицей "Сотрудники"
 class EmployeeWindow(tk.Toplevel):
@@ -1237,6 +1263,31 @@ class ProfessionWindow(tk.Toplevel):
         data = cursor.fetchall()
         for row in data:
             self.tree.insert("", "end", values=row)
+
+# О приложении
+class AboutApplicationWindow(tk.Toplevel):
+    def __init__(self, master):
+        super().__init__(master)
+        self.title("О приложении")
+        self.geometry("600x200")
+
+        # Текст с информацией о приложении
+        about_text = (
+            "Это приложение предназначено для управления базой данных сотрудников, отделов, вакансий\n"
+            "и заявок на вакансии. Вы можете добавлять, редактировать и удалять записи, а также осуществлять\n"
+            "поиск и просмотр данных в удобном интерфейсе.\n\n"
+            "Версия приложения: 1.1\n"
+            "Автор: Тонкович Влад\n"
+            "Год создания: 2023"
+        )
+
+        # Отображение текста
+        about_label = tk.Label(self, text=about_text, justify=tk.LEFT)
+        about_label.pack(pady=10)
+
+        # Кнопка для закрытия окна "О приложении"
+        close_button = tk.Button(self, text="Закрыть", command=self.destroy)
+        close_button.pack()
 
 # Главное окно приложения
 app = MainApp()

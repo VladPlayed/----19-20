@@ -2,7 +2,6 @@ import sqlite3
 import tkinter as tk
 from tkinter import ttk
 from tkinter.messagebox import showinfo
-from tkinter import messagebox
 from PIL import Image, ImageTk
 import webbrowser
 import pandas as pd

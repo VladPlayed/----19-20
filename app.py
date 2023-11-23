@@ -3,8 +3,8 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter.messagebox import showinfo
 from PIL import Image, ImageTk
-import webbrowser
 import pandas as pd
+import os
 
 # Создаем подключение к базе данных
 conn = sqlite3.connect('employee_db.db')
@@ -86,7 +86,7 @@ class MainApp(tk.Tk):
         AboutApplicationWindow(self)
 
     def user_guide(self):
-        webbrowser.open("UG.html")
+        os.system('UG.chm')
 
 # Окно для работы с таблицей "Сотрудники"
 class EmployeeWindow(tk.Toplevel):
